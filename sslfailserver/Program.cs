@@ -33,7 +33,7 @@ namespace SslFailServer
                 serverStream = new SslStream(server.GetStream(), true,
                     (a1, a2, a3, a4) => true,
                     (a1, a2, a3, a4, a5) => serverCert, EncryptionPolicy.RequireEncryption);
-                serverStream.AuthenticateAsServer(serverCert, false, SslProtocols.Tls13, false);
+                serverStream.AuthenticateAsServer(serverCert, false, SslProtocols.Tls12, false);
                 stucker.Set();
                 Console.WriteLine("server secured (details below)");
                 Console.WriteLine("---");
