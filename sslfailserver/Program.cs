@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace SslFailServer
 {
-	internal static class Program
-	{
-		private static void Main(string[] args)
-		{
+    internal static class Program
+    {
+        private static void Main(string[] args)
+        {
             var stucker = new AutoResetEvent(false);
             var listener = new TcpListener(new IPEndPoint(IPAddress.Loopback, 10000));
             TcpClient server = null;
@@ -62,5 +62,5 @@ namespace SslFailServer
             }
         }
 
-	}
+    }
 }

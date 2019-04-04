@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace SslFailClient
 {
-	internal static class Program
-	{
-		private static void Main(string[] args)
+    internal static class Program
+    {
+        private static void Main(string[] args)
         {
             var stucker = new AutoResetEvent(false);
             var client = new TcpClient();
@@ -46,6 +46,6 @@ namespace SslFailClient
                 clientStream?.Dispose();
                 client.Close();
             }
-		}
+        }
     }
 }
