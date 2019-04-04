@@ -25,7 +25,7 @@ namespace SslFailClient
                 clientStream = new SslStream(client.GetStream(), true,
                     (a1, a2, a3, a4) => true,
                     (a1, a2, a3, a4, a5) => null, EncryptionPolicy.RequireEncryption);
-                clientStream.AuthenticateAsClient("localhost", null, SslProtocols.Tls13, false);
+                clientStream.AuthenticateAsClient("localhost", null, SslProtocols.Tls12, false);
                 stucker.Set();
                 Console.WriteLine("client secured (details below)");
                 Console.WriteLine("---");
