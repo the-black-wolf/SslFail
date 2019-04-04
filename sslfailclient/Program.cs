@@ -13,6 +13,7 @@ namespace SslFailClient
 	{
 		private static void Main(string[] args)
         {
+            var stucker = new AutoResetEvent(false);
             var client = new TcpClient();
             SslStream clientStream = null;
             try
@@ -25,6 +26,7 @@ namespace SslFailClient
                     (a1, a2, a3, a4) => true,
                     (a1, a2, a3, a4, a5) => null, EncryptionPolicy.RequireEncryption);
                 clientStream.AuthenticateAsClient("localhost");
+                stucker.Set();
                 Console.WriteLine("client secured (details below)");
                 Console.WriteLine("---");
                 Helper.DisplaySecurityLevel(clientStream);
@@ -38,6 +40,9 @@ namespace SslFailClient
             }
             finally
             {
+                // we deliberately want to be stuck here if not secure (we do not want the other side to fail on dropped connection)
+                stucker.WaitOne();
+
                 clientStream?.Dispose();
                 client.Close();
             }
