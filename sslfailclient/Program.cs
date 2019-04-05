@@ -19,13 +19,13 @@ namespace SslFailClient
             try
             {
                 Console.WriteLine("client connecting");
-                var endPoint = new IPEndPoint(IPAddress.Loopback, 10000);
+                var endPoint = new IPEndPoint(Dns.GetHostEntry("www.ssllabs.com").AddressList[0], 10303); 
                 client.Connect(endPoint.Address, endPoint.Port);
                 Console.WriteLine("client negotiating");
                 clientStream = new SslStream(client.GetStream(), true,
                     (a1, a2, a3, a4) => true,
                     (a1, a2, a3, a4, a5) => null, EncryptionPolicy.RequireEncryption);
-                clientStream.AuthenticateAsClient("localhost");
+                clientStream.AuthenticateAsClient("sample", null, SslProtocols.Tls11, false);
                 stucker.Set();
                 Console.WriteLine("client secured (details below)");
                 Console.WriteLine("---");
